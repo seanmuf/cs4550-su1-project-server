@@ -54,8 +54,13 @@ public class ListingServices {
         listing.setL_category(updatedListing.getL_category());
         listing.setL_price(updatedListing.getL_price());
         listing.setL_description(updatedListing.getL_description());
+        listing.setL_quantity(updatedListing.getL_quantity());
         repository.save(listing);
         return listing;
+    }
+
+    public List<Listing> findAllListingsBySeller(Integer sid) {
+        return repository.findListingBySellerId(sid);
     }
 
 }

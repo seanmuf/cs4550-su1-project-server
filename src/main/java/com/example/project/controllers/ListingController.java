@@ -25,6 +25,12 @@ public class ListingController {
         return service.findAllListingsByCategory(category);
     }
 
+    @GetMapping("/api/sellers/{sid}/listings")
+    public List<Listing> findAllListingsBySeller(
+            @PathVariable("sid") Integer sid) {
+        return service.findAllListingsBySeller(sid);
+    }
+
     @PostMapping("/api/sellers/{sid}/listings")
     public Listing createListing(
             @PathVariable("sid") Integer sellerId,
@@ -39,7 +45,7 @@ public class ListingController {
     }
 
     @PutMapping("/api/listings/{lid}")
-    public Listing updateWidget(
+    public Listing updateListing(
             @PathVariable("lid") Integer listingId,
             @RequestBody Listing updatedListing) {
         return service.updateListing(listingId, updatedListing);

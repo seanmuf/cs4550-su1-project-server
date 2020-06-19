@@ -4,6 +4,7 @@ package com.example.project.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 
 @Entity
@@ -15,6 +16,16 @@ public class Listing {
     public String l_category;
     private String l_name;
     private Integer l_price;
+    private Integer l_quantity;
+
+    public Integer getL_quantity() {
+        return l_quantity;
+    }
+
+    public void setL_quantity(Integer l_quantity) {
+        this.l_quantity = l_quantity;
+    }
+
     private String l_description;
 
     public void setL_category(String l_category) {
@@ -53,6 +64,11 @@ public class Listing {
     @ManyToOne
     @JsonIgnore
     private Seller seller;
+
+    @ManyToOne
+    @JsonIgnore
+    private Buyer buyer;
+
 
     public void setSeller(Seller seller) {
         this.seller = seller;

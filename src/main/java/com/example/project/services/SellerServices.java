@@ -6,17 +6,25 @@ import com.example.project.repositories.SellerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+
 
 @Service
 public class SellerServices {
     @Autowired
     SellerRepository repository;
 
-    public List<Seller> findAllSellers() {
-        return repository.findAllSellers();
+    public Seller createSeller(Seller seller) {
+        return repository.save(seller);
+    }
+    public Seller findSellerById(Integer id) {
+        return repository.findSellerById(id);
     }
 
-    public Seller createSeller(Seller seller) {
+    public Seller findSellerByCredentials(String username, String password) {
+        return repository.findSellerByCredentials(username, password);
+    }
+
+    public Seller findSellerByUsername(String username) {
+        return repository.findSellerByUsername(username);
     }
 }

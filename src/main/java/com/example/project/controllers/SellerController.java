@@ -18,7 +18,7 @@ public class SellerController {
     @Autowired
     SellerServices service;
 
-    @PostMapping("/api/register")
+    @PostMapping("/api/register/seller")
     public Seller register(
             @RequestBody Seller seller,
             HttpSession session) {
@@ -31,13 +31,13 @@ public class SellerController {
         return null;
     }
 
-    @PostMapping("/api/profile")
+    @PostMapping("/api/profile/seller")
     public Seller profile(HttpSession session) {
         Seller currentSeller = (Seller)session.getAttribute("currentSeller");
         return currentSeller;
     }
 
-    @PostMapping("/api/login")
+    @PostMapping("/api/login/seller")
     public Seller login(
             @RequestBody Seller seller,
             HttpSession session) {
@@ -46,7 +46,7 @@ public class SellerController {
         return currentSeller;
     }
 
-    @PostMapping("/api/logout")
+    @PostMapping("/api/logout/seller")
     public void logout(HttpSession session) {
         session.invalidate();
     }
