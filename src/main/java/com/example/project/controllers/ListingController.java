@@ -1,11 +1,13 @@
 package com.example.project.controllers;
 
 import com.example.project.models.Listing;
+import com.example.project.models.User;
 import com.example.project.services.ListingServices;
 import com.example.project.services.SellerServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @RestController
@@ -25,23 +27,24 @@ public class ListingController {
         return service.findAllListingsByCategory(category);
     }
 
-    @GetMapping("/api/sellers/{sid}/listings")
-    public List<Listing> findAllListingsBySeller(
-            @PathVariable("sid") Integer sid) {
-        return service.findAllListingsBySeller(sid);
-    }
 
-    @PostMapping("/api/sellers/{sid}/listings")
+    @PostMapping("/api/listing")
     public Listing createListing(
-            @PathVariable("sid") Integer sellerId,
-            @RequestBody Listing newListing) {
-        return service.createListing(sellerId, newListing);
+            @RequestBody Listing listing,
+            HttpSession session) {
+        Listing existingListing = service.findListingById(listing.getL_price());
+        if(existingListing == null) {
+            Listing currentListing = service.createListing(listing);
+            session.setAttribute("currentListing", currentListing);
+            return currentListing;
+        }
+        return null;
     }
 
     @DeleteMapping("/api/listings/{lid}")
     public List<Listing> deleteListing(
-            @PathVariable("lid") Integer lid) {
-        return service.deleteListing(lid);
+            @PathVariable("lid") Integer listingId) {
+        return service.deleteListing(listingId);
     }
 
     @PutMapping("/api/listings/{lid}")
@@ -50,5 +53,7 @@ public class ListingController {
             @RequestBody Listing updatedListing) {
         return service.updateListing(listingId, updatedListing);
     }
+
+
 
 }

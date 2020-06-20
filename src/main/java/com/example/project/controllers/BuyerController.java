@@ -1,53 +1,32 @@
 package com.example.project.controllers;
 
 import com.example.project.models.Buyer;
+import com.example.project.models.Seller;
 import com.example.project.services.BuyerServices;
+import com.example.project.services.SellerServices;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 
 @RestController
 @CrossOrigin(
-        origins = "http://localhost:8080",
+        origins = "http://localhost:3000",
         allowCredentials = "true")
 public class BuyerController {
     @Autowired
     BuyerServices service;
 
-    @PostMapping("/api/register/buyer")
+    @PostMapping("/api/buyers")
     public Buyer register(
-            @RequestBody Buyer Buyer,
+            @RequestBody Buyer buyer,
             HttpSession session) {
-        Buyer existingBuyer = service.findBuyerByUsername(Buyer.getUsername());
+        Buyer existingBuyer = service.findBuyerById(buyer.getId());
         if(existingBuyer == null) {
-            Buyer currentBuyer = service.createBuyer(Buyer);
+            Buyer currentBuyer = service.createBuyer(buyer);
             session.setAttribute("currentBuyer", currentBuyer);
             return currentBuyer;
         }
         return null;
-    }
-
-    @PostMapping("/api/profile/buyer")
-    public Buyer profile(HttpSession session) {
-        Buyer currentBuyer = (Buyer)session.getAttribute("currentBuyer");
-        return currentBuyer;
-    }
-
-    @PostMapping("/api/login/buyer")
-    public Buyer login(
-            @RequestBody Buyer Buyer,
-            HttpSession session) {
-        Buyer currentBuyer = service.findBuyerByCredentials(Buyer.getUsername(), Buyer.getPassword());
-        session.setAttribute("currentBuyer", currentBuyer);
-        return currentBuyer;
-    }
-
-    @PostMapping("/api/logout/buyer")
-    public void logout(HttpSession session) {
-        session.invalidate();
     }
 }
