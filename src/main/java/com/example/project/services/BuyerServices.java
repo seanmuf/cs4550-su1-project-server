@@ -1,27 +1,41 @@
 package com.example.project.services;
 
 import com.example.project.models.Buyer;
+import com.example.project.models.Listing;
+import com.example.project.models.Seller;
+import com.example.project.models.User;
 import com.example.project.repositories.BuyerRepository;
+import com.example.project.repositories.CartRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class BuyerServices {
     @Autowired
     BuyerRepository repository;
 
-    public Buyer createBuyer(Buyer Buyer) {
-        return repository.save(Buyer);
-    }
-    public Buyer findBuyerById(Integer id) {
-        return repository.findBuyerById(id);
+    @Autowired
+    CartRepository cartRepository;
+
+    public Buyer createBuyer(Buyer buyer) {
+        return repository.save(buyer);
     }
 
-    public Buyer findBuyerByCredentials(String username, String password) {
-        return repository.findBuyerByCredentials(username, password);
+    public Listing addToCart(Listing listing) {
+        return cartRepository.save(listing);
     }
 
-    public Buyer findBuyerByUsername(String username) {
-        return repository.findBuyerByUsername(username);
+    public List<Listing> deleteFromCart(Integer lid) {
+        cartRepository.deleteById(lid);
+        List<Listing> result = new ArrayList<>();
+        return result;
     }
+
+        public Buyer findBuyerById(Integer id) {
+            return repository.findBuyerById(id);
+        }
+
 }

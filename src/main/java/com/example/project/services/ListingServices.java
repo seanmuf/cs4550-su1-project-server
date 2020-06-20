@@ -2,6 +2,7 @@ package com.example.project.services;
 
 import com.example.project.models.Listing;
 import com.example.project.models.Seller;
+import com.example.project.models.User;
 import com.example.project.repositories.ListingRepository;
 import com.example.project.repositories.SellerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +21,7 @@ public class ListingServices {
     SellerRepository sellerRepository;
 
 
-    public Listing createListing(Integer sellerId, Listing newListing) {
-        Seller seller = sellerRepository.findSellerById(sellerId);
-        newListing.setSeller(seller);
+    public Listing createListing(Listing newListing) {
         return repository.save(newListing);
     }
 
@@ -40,11 +39,15 @@ public class ListingServices {
     public List<Listing> findAllListingsByCategory(String category) {
         ArrayList<Listing> result = new ArrayList<>();
         List<Listing> listings = repository.findAllListings();
-        for (int i = 0; i < listings.size(); i++) {
-            if (listings.get(i).l_category.equals(category)) {
-                result.add(listings.get(i));
+
+            for (Listing l : listings) {
+                if (l.l_category != null) {
+                    if (l.l_category.toLowerCase().equals(category.toLowerCase())) {
+                        result.add(l);
+                    }
+                }
             }
-        }
+
         return result;
     }
 
@@ -59,8 +62,9 @@ public class ListingServices {
         return listing;
     }
 
-    public List<Listing> findAllListingsBySeller(Integer sid) {
-        return repository.findListingBySellerId(sid);
+    public Listing findListingById(Integer id) {
+        return repository.findListingById(id);
     }
+
 
 }
