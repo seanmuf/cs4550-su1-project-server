@@ -1,28 +1,19 @@
 package com.example.project.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.WhereJoinTable;
+
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
 @Table(name="buyers")
-public class Buyer {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-    private String username;
-    private String password;
-    private String f_name;
-    private String l_name;
-    private String email;
-    private String phone;
+public class Buyer extends User {
+    private Integer cartId;
 
-    public String getUsername() {
-        return username;
-    }
 
-    public String getPassword() {
-        return password;
-    }
+    @OneToOne(mappedBy = "buyer")
+    private Cart cart;
 
     @ManyToMany
     @JoinTable(
@@ -30,5 +21,7 @@ public class Buyer {
             joinColumns=@JoinColumn(name="BUYER_ID", referencedColumnName="ID"),
             inverseJoinColumns=@JoinColumn(name="LISTING_ID", referencedColumnName="ID"))
     private List<Listing> listings;
+
+
 
 }

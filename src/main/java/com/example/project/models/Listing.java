@@ -60,17 +60,12 @@ public class Listing {
         return l_description;
     }
 
+    @ManyToOne
+    private Cart cart;
 
     @ManyToOne
-    @JsonIgnore
-    private Seller seller;
-
-    @ManyToOne
-    @JsonIgnore
-    private Buyer buyer;
+    private Store store;
 
 
-    public void setSeller(Seller seller) {
-        this.seller = seller;
-    }
+
 }
