@@ -16,8 +16,10 @@ public interface ListingRepository extends CrudRepository<Listing, Integer> {
             @Param("listingId") Integer lid
     );
 
-    @Query("SELECT listings FROM Listing listings WHERE listings.seller=:sellerId")
-    List<Listing> findListingBySellerId(
-            @Param("sellerId") Integer sid
+    @Query("SELECT listings FROM Listing listings WHERE listings.l_category=:category")
+    Listing findAllListingsByCategory(
+            @Param("category") String category
     );
+
+
 }
