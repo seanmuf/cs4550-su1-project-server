@@ -11,7 +11,8 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "https://wbdv-project-prototype-seanmuf.herokuapp.com/")
+@CrossOrigin(origins = "https://wbdv-project-prototype-seanmuf.herokuapp.com",
+        maxAge = 3600)
 public class ListingController {
     @Autowired
     ListingServices service;

@@ -13,7 +13,8 @@ import java.util.List;
 
 @RestController
 @CrossOrigin(
-        origins = "https://wbdv-project-prototype-seanmuf.herokuapp.com/",
+        origins = "https://wbdv-project-prototype-seanmuf.herokuapp.com",
+        maxAge = 3600,
         allowCredentials = "true")
 public class UserController {
     @Autowired
