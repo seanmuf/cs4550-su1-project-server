@@ -17,7 +17,16 @@ public class User {
     private String email;
     private String type;
 
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private Buyer buyer;
 
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private Seller seller;
+
+
+    public void setBuyer(Buyer buyer) {
+        this.buyer = buyer;
+    }
 
     public String getUsername() {
         return username;

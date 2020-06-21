@@ -12,6 +12,10 @@ public class Cart {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @OneToOne
+    @PrimaryKeyJoinColumn
+    private Buyer buyer;
+
     public Integer getId() {
         return id;
     }
@@ -36,11 +40,10 @@ public class Cart {
         this.listings = listings;
     }
 
-    @OneToOne
-    @JsonIgnore
-    private Buyer buyer;
+
 
     @OneToMany(mappedBy = "cart")
     private List<Listing> listings;
+
 
 }

@@ -20,4 +20,5 @@ public class StoreServices {
     public Store findStoreById(Integer storeId) {
         return repository.findStoreById(storeId);
     }
+
 }

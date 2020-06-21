@@ -14,8 +14,13 @@ public class Seller extends User {
     @OneToOne(mappedBy = "seller")
     private Store store;
 
+    @OneToOne
+    @PrimaryKeyJoinColumn
+    private User user;
 
-
+    public void setUser(User user) {
+        this.user = user;
+    }
 
 
 }

@@ -1,6 +1,8 @@
 package com.example.project.controllers;
 
+import com.example.project.models.Buyer;
 import com.example.project.models.User;
+import com.example.project.services.BuyerServices;
 import com.example.project.services.UserServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +16,9 @@ import javax.servlet.http.HttpSession;
 public class UserController {
     @Autowired
     UserServices service;
+
+    @Autowired
+    BuyerServices buyerServices;
 
 
     @PostMapping("/api/register")
@@ -44,6 +49,15 @@ public class UserController {
         service.updateUser(oldUser, updatedUser);
         session.setAttribute("oldUser", oldUser);
         return oldUser;
+    }
+
+    @PostMapping("/api/users/{uid}")
+    public User findUser(
+            @PathVariable("uid") Integer userId,
+            HttpSession session) {
+        User currentUser = service.findUserById(userId);
+        session.setAttribute("currentUser", currentUser);
+        return currentUser;
     }
 
     @PostMapping("/api/login")

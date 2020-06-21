@@ -14,8 +14,12 @@ public class Store {
     private Integer id;
 
     @OneToOne
-    @JsonIgnore
+    @PrimaryKeyJoinColumn
     private Seller seller;
+
+    public void setSeller(Seller seller) {
+        this.seller = seller;
+    }
 
     @OneToMany(mappedBy = "store")
     private List<Listing> listings;

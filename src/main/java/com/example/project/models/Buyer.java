@@ -9,11 +9,18 @@ import java.util.List;
 @Entity
 @Table(name="buyers")
 public class Buyer extends User {
-    private Integer cartId;
 
-
-    @OneToOne(mappedBy = "buyer")
+    @OneToOne(mappedBy = "buyer", cascade = CascadeType.ALL)
     private Cart cart;
+
+    @OneToOne
+    @PrimaryKeyJoinColumn
+    private User user;
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
 
     @ManyToMany
     @JoinTable(
@@ -21,7 +28,6 @@ public class Buyer extends User {
             joinColumns=@JoinColumn(name="BUYER_ID", referencedColumnName="ID"),
             inverseJoinColumns=@JoinColumn(name="LISTING_ID", referencedColumnName="ID"))
     private List<Listing> listings;
-
 
 
 }

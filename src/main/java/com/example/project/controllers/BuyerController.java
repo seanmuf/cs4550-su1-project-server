@@ -2,6 +2,7 @@ package com.example.project.controllers;
 
 import com.example.project.models.Buyer;
 import com.example.project.models.Seller;
+import com.example.project.models.User;
 import com.example.project.services.BuyerServices;
 import com.example.project.services.SellerServices;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +20,9 @@ public class BuyerController {
 
     @PostMapping("/api/buyers")
     public Buyer register(
-            @RequestBody Buyer buyer,
             HttpSession session) {
-        Buyer existingBuyer = service.findBuyerById(buyer.getId());
-        if(existingBuyer == null) {
-            Buyer currentBuyer = service.createBuyer(buyer);
+        if(true) {
+            Buyer currentBuyer = service.createBuyer();
             session.setAttribute("currentBuyer", currentBuyer);
             return currentBuyer;
         }
