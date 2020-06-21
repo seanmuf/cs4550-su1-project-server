@@ -10,7 +10,7 @@ import javax.servlet.http.HttpSession;
 
 @RestController
 @CrossOrigin(
-        origins = "https://student-marketplace-seanmuf.herokuapp.com/",
+        origins = "*",
         allowCredentials = "true")
 public class StoreController {
 
