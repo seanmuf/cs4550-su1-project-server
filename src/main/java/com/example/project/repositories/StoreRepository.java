@@ -12,6 +12,11 @@ public interface StoreRepository extends CrudRepository<Store, Integer> {
     @Query("SELECT stores FROM Store stores")
     List<Store> findAllStores();
 
+    @Query("SELECT stores.listings FROM Store stores WHERE stores.id=:storeId")
+    List<Listing> findAllStoreListings(
+            @Param("storeId") Integer storeId
+    );
+
     @Query("SELECT stores FROM Store stores WHERE stores.id=:storeId")
     Store findStoreById(
             @Param("storeId") Integer storeId

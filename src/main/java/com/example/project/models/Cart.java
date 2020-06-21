@@ -12,8 +12,8 @@ public class Cart {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @OneToOne
-    @PrimaryKeyJoinColumn
+    @OneToOne(optional = false, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name="bid")
     private Buyer buyer;
 
     public Integer getId() {

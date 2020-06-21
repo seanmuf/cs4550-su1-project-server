@@ -13,16 +13,20 @@ public class Store {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @OneToOne
-    @PrimaryKeyJoinColumn
+    @OneToOne(optional = false, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name="sid")
     private Seller seller;
 
     public void setSeller(Seller seller) {
         this.seller = seller;
     }
 
-    @OneToMany(mappedBy = "store")
+    @OneToMany(mappedBy = "store", cascade = CascadeType.ALL)
     private List<Listing> listings;
+
+    public void addToStore(Listing listing) {
+        listings.add(listing);
+    }
 
     public Integer getId() {
         return id;

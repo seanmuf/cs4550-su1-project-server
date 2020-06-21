@@ -20,8 +20,14 @@ public class SellerServices {
     @Autowired
     StoreRepository storeRepository;
 
-    public Seller createSeller(Seller seller) {
-        return repository.save(seller);
+    public Seller createSeller(User u) {
+        Seller s = new Seller();
+        s.setUser(u);
+        return repository.save(s);
+    }
+
+    public List<Seller> findAllSellers() {
+        return repository.findAllSellers();
     }
 
 

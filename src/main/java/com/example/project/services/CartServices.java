@@ -1,5 +1,6 @@
 package com.example.project.services;
 
+import com.example.project.models.Buyer;
 import com.example.project.models.Cart;
 import com.example.project.models.Listing;
 import com.example.project.models.Store;
@@ -25,8 +26,10 @@ public class CartServices {
 
 
 
-    public Cart createCart(Cart cart) {
-        return repository.save(cart);
+    public Cart createCart(Buyer b) {
+        Cart c = new Cart();
+        c.setBuyer(b);
+        return repository.save(c);
     }
 
 

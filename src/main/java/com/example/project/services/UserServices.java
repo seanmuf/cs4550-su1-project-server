@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
+import java.util.List;
 
 @Service
 public class UserServices {
@@ -25,6 +26,10 @@ public class UserServices {
         oldUser.setUserType(updatedUser.getUserType());
         repository.save(oldUser);
         return oldUser;
+    }
+
+    public List<User> findAllUsers() {
+        return repository.findAllUsers();
     }
 
     public User createUser(User user) {

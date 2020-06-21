@@ -1,33 +1,36 @@
 package com.example.project.controllers;
 
+import com.example.project.models.Buyer;
 import com.example.project.models.Cart;
 import com.example.project.models.Store;
+import com.example.project.models.User;
+import com.example.project.services.BuyerServices;
 import com.example.project.services.CartServices;
 import com.example.project.services.StoreServices;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 
 @RestController
 @CrossOrigin(
-        origins = "https://student-marketplace-seanmuf.herokuapp.com/",
+        origins = "http://localhost:3000",
         allowCredentials = "true")
 public class CartController {
 
     @Autowired
     CartServices service;
 
-    @PostMapping("/api/carts")
+    @Autowired
+    BuyerServices buyerServices;
+
+    @PostMapping("/api/{bid}/carts")
     public Cart createCart(
-            @RequestBody Cart cart,
+            @PathVariable("bid") Integer buyerId,
             HttpSession session) {
-        Cart existingCart = service.findCartById(cart.getId());
-        if(existingCart == null) {
-            Cart currentCart = service.createCart(cart);
+        Buyer existingBuyer = buyerServices.findBuyerById(buyerId);
+        if(existingBuyer != null) {
+            Cart currentCart = service.createCart(existingBuyer);
             session.setAttribute("currentCart", currentCart);
             return currentCart;
         }

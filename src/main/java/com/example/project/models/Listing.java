@@ -63,7 +63,8 @@ public class Listing {
     @ManyToOne
     private Cart cart;
 
-    @ManyToOne
+    @ManyToOne(optional = false, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name="sid")
     private Store store;
 
 

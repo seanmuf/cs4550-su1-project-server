@@ -1,6 +1,7 @@
 package com.example.project.controllers;
 
 import com.example.project.models.Buyer;
+import com.example.project.models.Listing;
 import com.example.project.models.User;
 import com.example.project.services.BuyerServices;
 import com.example.project.services.UserServices;
@@ -8,10 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @RestController
 @CrossOrigin(
-        origins = "https://student-marketplace-seanmuf.herokuapp.com/",
+        origins = "http://localhost:3000",
         allowCredentials = "true")
 public class UserController {
     @Autowired
@@ -49,6 +51,11 @@ public class UserController {
         service.updateUser(oldUser, updatedUser);
         session.setAttribute("oldUser", oldUser);
         return oldUser;
+    }
+
+    @GetMapping("/api/users")
+    public List<User> findAllUsers() {
+        return service.findAllUsers();
     }
 
     @PostMapping("/api/users/{uid}")

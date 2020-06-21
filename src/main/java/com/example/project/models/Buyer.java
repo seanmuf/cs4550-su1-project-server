@@ -8,26 +8,30 @@ import java.util.List;
 
 @Entity
 @Table(name="buyers")
-public class Buyer extends User {
+public class Buyer {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
     @OneToOne(mappedBy = "buyer", cascade = CascadeType.ALL)
     private Cart cart;
 
-    @OneToOne
-    @PrimaryKeyJoinColumn
+    @OneToOne(optional = false, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name="uid")
     private User user;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public void setUser(User user) {
         this.user = user;
     }
 
-
-    @ManyToMany
-    @JoinTable(
-            name="transactions",
-            joinColumns=@JoinColumn(name="BUYER_ID", referencedColumnName="ID"),
-            inverseJoinColumns=@JoinColumn(name="LISTING_ID", referencedColumnName="ID"))
-    private List<Listing> listings;
 
 
 }
