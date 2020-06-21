@@ -14,7 +14,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin(
-        origins = "http://localhost:3000",
+        origins = "https://student-marketplace-seanmuf.herokuapp.com/",
         allowCredentials = "true")
 public class StoreController {
 
