@@ -50,7 +50,7 @@ public class UserController {
             HttpSession session) {
         User oldUser = service.findUserById(userId);
         service.updateUser(oldUser, updatedUser);
-        session.setAttribute("oldUser", oldUser);
+        session.setAttribute("currentUser", oldUser);
         return oldUser;
     }
 
