@@ -38,7 +38,7 @@ public class SellerController {
     }
 
     @PostMapping("/api/seller")
-    public Seller profile(HttpSession session) {
+    public Seller seller(HttpSession session) {
         Seller currentSeller = (Seller)session.getAttribute("currentSeller");
         return currentSeller;
     }

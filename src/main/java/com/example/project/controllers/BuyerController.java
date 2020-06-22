@@ -37,6 +37,12 @@ public class BuyerController {
         return null;
     }
 
+    @PostMapping("/api/buyer")
+    public Buyer buyer(HttpSession session) {
+        Buyer currentBuyer = (Buyer)session.getAttribute("currentBuyer");
+        return currentBuyer;
+    }
+
 
     @GetMapping("/api/buyers")
     public List<Buyer> findAllBuyers() {

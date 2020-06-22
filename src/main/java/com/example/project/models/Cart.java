@@ -16,6 +16,9 @@ public class Cart {
     @JoinColumn(name="bid")
     private Buyer buyer;
 
+    @OneToMany(mappedBy = "cart")
+    private List<Listing> listings;
+
     public Integer getId() {
         return id;
     }
@@ -32,6 +35,10 @@ public class Cart {
         this.buyer = buyer;
     }
 
+    public void addToCart(Listing listing) {
+        listings.add(listing);
+    }
+
     public List<Listing> getListings() {
         return listings;
     }
@@ -42,8 +49,7 @@ public class Cart {
 
 
 
-    @OneToMany(mappedBy = "cart")
-    private List<Listing> listings;
+
 
 
 }

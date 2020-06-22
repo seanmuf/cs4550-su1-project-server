@@ -24,7 +24,10 @@ public class CartServices {
     }
 
 
-
+    public Cart addToCart(Listing listing, Cart cart) {
+        cart.addToCart(listing);
+        return repository.save(cart);
+    }
 
     public Cart createCart(Buyer b) {
         Cart c = new Cart();

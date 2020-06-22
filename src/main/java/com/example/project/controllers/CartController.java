@@ -37,5 +37,12 @@ public class CartController {
         }
         return null;
     }
+
+    @PostMapping("/api/cart")
+    public Cart cart(HttpSession session) {
+        Cart currentCart = (Cart)session.getAttribute("currentCart");
+        return currentCart;
+    }
+
 }
 
