@@ -49,6 +49,9 @@ public class StoreController {
 
     @GetMapping("/api/store/listings")
     public List<Listing> findListingsForStore(HttpSession session) {
+        System.out.println(session.getAttribute("currentUser"));
+        System.out.println(session.getAttribute("currentSeller"));
+        System.out.println(session.getAttribute("currentStore"));
         Store currentStore = (Store)session.getAttribute("currentStore");
         return service.findAllStoreListings(currentStore);
     }
