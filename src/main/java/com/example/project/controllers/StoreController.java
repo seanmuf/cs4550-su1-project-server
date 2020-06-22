@@ -49,8 +49,8 @@ public class StoreController {
 
     @GetMapping("/api/store/listings")
     public List<Listing> findListingsForStore(HttpSession session) {
-        User currentUser = (User)session.getAttribute("currentUser");
-        return service.findAllStoreListings(currentUser);
+        Store currentStore = (Store)session.getAttribute("currentStore");
+        return service.findAllStoreListings(currentStore);
     }
 
     @PostMapping("/api/store/listings/create")

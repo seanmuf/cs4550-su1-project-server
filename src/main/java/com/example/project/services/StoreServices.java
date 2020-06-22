@@ -26,8 +26,8 @@ public class StoreServices {
         return repository.save(store);
     }
 
-    public List<Listing> findAllStoreListings(User user) {
-        return repository.findAllStoreListings(user.getId());
+    public List<Listing> findAllStoreListings(Store store) {
+        return repository.findAllStoreListings(store.getId());
     }
 
 
