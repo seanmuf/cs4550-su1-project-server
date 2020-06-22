@@ -10,7 +10,7 @@ import java.util.List;
 @Table(name="buyers")
 public class Buyer {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @OneToOne(mappedBy = "buyer", cascade = CascadeType.ALL)
